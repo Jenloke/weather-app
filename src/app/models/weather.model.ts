@@ -13,6 +13,7 @@ export interface IWeather {
     id: number;
     name: string;
     cod: number;
+    unit: 'metric' | 'imperial';
 }
 
 export interface Coordinates{

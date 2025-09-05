@@ -1,3 +1,3 @@
 export interface IWeatherService {
-    getWeather(city: string): Promise<any>;
+    getWeather(city: string, unit: string): Promise<any>;
 }
