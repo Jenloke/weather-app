@@ -1,23 +1,44 @@
-import { Component, inject, OnInit, resource } from '@angular/core';
+import { Component, inject, OnInit, output, resource, signal } from '@angular/core';
 import { Weather } from '../../services/weather/weather';
 import { SampleCard } from '../../components/sample-card/sample-card';
+
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+type UnitSystem= 'metric' | 'imperial';
 
 @Component({
   selector: 'app-home',
   imports: [
-    SampleCard
+    SampleCard,
+    CommonModule, 
+    ReactiveFormsModule,
   ],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
 export class Home {
+  units = ['metric', 'imperial']
+
+  form = new FormGroup({
+    city: new FormControl(''),
+    unit: new FormControl('metric')
+  })
 
   //injector
   private readonly weatherService = inject(Weather);
-
   //signals
-  public readonly weatherDataResource = resource({
-    loader: () => this.weatherService.getWeather('Makati')
+  inputCity = signal('Bauan');
+  inputUnit = signal<UnitSystem>('metric');
+
+  public weatherDataResource = resource({
+    params: () => ({city: this.inputCity(), unit: this.inputUnit()}),
+    loader: async ({params}) => (this.weatherService.getWeather(params.city, params.unit)),
   });
+
+  onSubmit = () => {
+    this.inputCity.set(this.form.value.city || '');
+    this.inputUnit.set(this.form.value.unit as UnitSystem || 'metric');
+  }
 
 }

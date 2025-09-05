@@ -4,6 +4,32 @@ Welcome to the Weather App project! 🚀
 Dear new hire, we're excited to have you on board. Please make sure to read the README.md file in this repository for important instructions, project guidelines, and onboarding steps before you start coding.
 -->
 <!-- You can freely remove the <app-sample-card> and create your 
-    own components for displaying weather data. -->
-    
-<app-sample-card [weatherData]="weatherDataResource.value()"></app-sample-card>
+    own components for displaying weather data. -->    
+
+<div class="my-10 flex flex-col items-center justify-center gap-10">
+    <form class="flex flex-col gap-2 gap-1 *:flex *:gap-5 *:items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+            <input class="p-1 border-2" type="text" formControlName="city" placeholder="Input City"/>
+        </div>
+        <div>
+            <label class="pl-1 w-1/4" for="country">Unit:</label>
+            <select class="w-3/4 p-1 border-2" id="unit" formControlName="unit">
+                @for (u of units; track u) {
+                    <option class="w-full" [value]="u">{{ u.charAt(0).toUpperCase()+ u.slice(1) }}</option>
+                }
+            </select>
+        </div>
+        <button class="mx-auto mt-2 px-10 py-1 px-5 border-2" type="submit">Search</button>
+    </form>
+
+    @if (weatherDataResource.isLoading()) {
+        <p>Loading weather data...</p>
+    } @else if (weatherDataResource.error()) {
+        <p class="error">Error: {{ weatherDataResource.error() }}</p>
+    } 
+    @else if (weatherDataResource.value()) {
+        <app-sample-card class="w-3/4 sm:w-80" [weatherData]="weatherDataResource.value()"></app-sample-card>
+    } @else {
+        <p>No weather data yet. Please enter a city and click "Get Weather".</p>
+    }
+</div>

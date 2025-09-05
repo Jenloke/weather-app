@@ -1,10 +1,35 @@
-<div class="card">
-    <div class="card-header">
-        <h2>{{ weatherData()?.name }}</h2>
+<div class="card text-center border-1 p-5 flex flex-col items-center justify-center gap-3 bg-yellow-100">
+    <h2 class="text-3xl">
+        {{ `${weatherData()?.main?.temp}${selectedUnits.temperatureUnit}`}}
+    </h2>
+    <div class="flex flex-row items-center gap-3">
+        <div class="card-header flex flex-col items-center justify-center text-lg">
+            <h2>
+                {{ `${weatherData()?.name}, ${weatherData()?.sys?.country}` }}
+            </h2>
+            <h2>
+                {{ weatherData()?.weather?.at(0)?.main }}
+            </h2>
+            <!-- <h2>
+                {{ weatherData()?.weather?.at(0)?.description?.toLocaleLowerCase() }}
+            </h2> -->
+        </div>
+        <img 
+            [src]="'https://openweathermap.org/img/wn/' + weatherData()?.weather?.at(0)?.icon + '@2x.png'" 
+            [alt]="weatherData()?.weather?.at(0)?.description"
+            class="w-20 h-20 m-auto" 
+        />
     </div>
-    <div class="card-body">
-        <p><strong>Temperature:</strong> {{ weatherData()?.main?.temp }}°C</p>
-        <p><strong>Humidity:</strong> {{ weatherData()?.main?.humidity }}%</p>
-        <p><strong>Wind Speed:</strong> {{ weatherData()?.wind?.speed }} km/h</p>
+    
+    <div class="flex flex-col gap-1 text-left">
+        <p>Feels Like: {{ `${weatherData()?.main?.feels_like}${selectedUnits.temperatureUnit}` }}</p>
+        <p>Humidity: {{ weatherData()?.main?.humidity }}%</p>
+        <p>Wind Speed: {{ `${weatherData()?.wind?.speed} ${selectedUnits.speedUnit} `}}</p>        
     </div>
+    
+    <div class="flex flex-col sm:flex-row sm:gap-7">
+        <p>Sunrise: {{ formatUnixToLocalTime(weatherData()?.sys?.sunrise) }}</p>
+        <p>Sunset: {{ formatUnixToLocalTime(weatherData()?.sys?.sunset) }}</p>
+    </div>
+    <button (click)="display()">Show Details</button>
 </div>
