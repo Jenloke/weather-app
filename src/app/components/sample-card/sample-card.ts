@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { IWeather } from '../../models/weather.model';
 
@@ -13,6 +13,8 @@ import { IWeather } from '../../models/weather.model';
 export class SampleCard {
 
   readonly weatherData = input<IWeather>();
+
+  data = computed(() => this.weatherData());
 
   // description = computed(() => {
   //   this.weatherData()?.weather?.at(0)?.description?.toLowerCase()
