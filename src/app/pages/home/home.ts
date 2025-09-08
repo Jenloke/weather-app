@@ -4,6 +4,7 @@ import { SampleCard } from '../../components/sample-card/sample-card';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ErrorCard } from "../../components/error-card/error-card";
 
 type UnitSystem= 'metric' | 'imperial';
 
@@ -11,9 +12,10 @@ type UnitSystem= 'metric' | 'imperial';
   selector: 'app-home',
   imports: [
     SampleCard,
-    CommonModule, 
+    CommonModule,
     ReactiveFormsModule,
-  ],
+    ErrorCard
+],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
