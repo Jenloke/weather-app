@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, effect, input, Input, Signal } from '@angular/core';
 import { IWeather } from '../../models/weather.model';
 
 @Component({
@@ -13,22 +13,25 @@ export class SampleCard {
 
   data = computed(() => this.weatherData());
 
+  // @Input() displayUnit!: Signal<'metric' | 'imperial'>;
+  @Input() displayUnit!: any;
+  selectedUnit: 'metric' | 'imperial' = this.displayUnit;
+
   // description = computed(() => {
   //   this.weatherData()?.weather?.at(0)?.description?.toLowerCase()
   // })
 
-  display = () => console.log(this.weatherData());
+  e = effect(() => {
+    this.selectedUnit = this.displayUnit;
+  })
+  get selectedUnits() {
+    return this.units[this.selectedUnit];
+  }
 
   units = {
     metric: { temperatureUnit: '°C', speedUnit: 'km/h' },
     imperial: { temperatureUnit: '°F', speedUnit: 'mp/h' },
   };
-
-  selectedUnit: 'metric' | 'imperial' = 'metric';
-
-  get selectedUnits() {
-    return this.units[this.selectedUnit];
-  }
 
   formatTime(unixUtc?: number, timezone?: number): string {
   if (!unixUtc || timezone === undefined) return '';
