@@ -1,0 +1,10 @@
+<div class="p-2 border-2 rounded-lg shadow-lg">
+    <p class="text-xl text-center">Recent</p>
+    <div class="flex flex-col overflow-scroll gap-1 sm:flex-row">
+        @for (search of recentSearches(); track search) {
+            <p class="">
+                {{ search.city }} - {{ convertTemp(search.temp, search.unit, displayUnit)}}
+            </p>
+        }
+    </div>
+</div>
