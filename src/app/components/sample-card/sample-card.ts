@@ -1,12 +1,9 @@
 import { Component, computed, input } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { IWeather } from '../../models/weather.model';
 
 @Component({
   selector: 'app-sample-card',
-  imports: [
-    // DatePipe
-  ],  
+  imports: [],  
   templateUrl: './sample-card.html',
   styleUrl: './sample-card.css'
 })
@@ -33,9 +30,20 @@ export class SampleCard {
     return this.units[this.selectedUnit];
   }
 
-  formatUnixToLocalTime = (unixTime: number | undefined): string => {
-    if (!unixTime) return '';
-    const date = new Date(unixTime * 1000);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
+  formatTime(unixUtc?: number, timezone?: number): string {
+  if (!unixUtc || timezone === undefined) return '';
+  // unixUtc is sunrise/sunset, timezone is offset in seconds
+  const date = new Date((unixUtc + timezone) * 1000);
+
+  let hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // 0 becomes 12
+
+  const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+
+  return `${hours}:${minutesStr} ${ampm}`;
+}
 }
