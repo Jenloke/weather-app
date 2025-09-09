@@ -6,8 +6,8 @@ Dear new hire, we're excited to have you on board. Please make sure to read the 
 <!-- You can freely remove the <app-sample-card> and create your 
     own components for displaying weather data. -->    
 
-<div class="sm:h-[100dvh] flex flex-col items-center justify-center gap-10 bg-gradient-to-b from-gray-400 to-green-300">
-    <form class="flex flex-col gap-2 *:flex *:gap-5 *:items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="h-[100vh] flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-gray-300 to-blue-200">
+    <form class="flex flex-col gap-3 *:flex *:gap-5 *:items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div>
             <input class="p-2 border-2 rounded-lg shadow-lg outline-none" type="text" formControlName="city" placeholder="Input City"/>
         </div>
@@ -19,7 +19,7 @@ Dear new hire, we're excited to have you on board. Please make sure to read the 
                 }
             </select>
         </div>
-        <button class="mx-auto mt-2 px-10 py-1 border-2 rounded-lg shadow-lg" type="submit">Search</button>
+        <button class="mx-auto px-10 py-1 border-2 rounded-lg shadow-lg" type="submit">Search</button>
     </form>
 
     @if (weatherDataResource.isLoading()) {
@@ -28,8 +28,12 @@ Dear new hire, we're excited to have you on board. Please make sure to read the 
         <app-error-card error="weatherDataResource.error()" />
     } 
     @else if (weatherDataResource.hasValue()) {
-        <app-sample-card class="w-3/4 sm:w-80" [weatherData]="weatherDataResource.value()"></app-sample-card>
+        <app-sample-card class="w-6/10 sm:w-75" [weatherData]="weatherDataResource.value()" [displayUnit]="inputUnit()"/>
     } @else {
         <p>No weather data yet. Please enter a city and click "Get Weather".</p>
+    }
+    
+    @if (recents()) {
+        <app-recent-searches [recentSearches]="recentSearches" [displayUnit]="inputUnit()"/>
     }
 </div>
