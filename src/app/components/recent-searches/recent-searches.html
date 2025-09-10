@@ -1,10 +1,11 @@
-<div class="p-2 border-2 rounded-lg shadow-lg">
+<div class="p-3 border-2 rounded-lg shadow-lg">
     <p class="text-xl text-center">Recent</p>
-    <div class="flex flex-col overflow-scroll gap-1 sm:flex-row">
+    <div class="flex items-center justify-center gap-5 sm:flex-row">
         @for (search of recentSearches(); track search) {
-            <p class="">
-                {{ search.city }} - {{ convertTemp(search.temp, search.unit, displayUnit)}}
-            </p>
+            <div class="text-center flex flex-col">
+                <p>{{ search.city }}</p>
+                <p>{{ convertTemp(search.temp, search.unit, displayUnit)}}</p>
+            </div>
         }
     </div>
 </div>

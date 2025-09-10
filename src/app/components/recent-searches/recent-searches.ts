@@ -21,5 +21,5 @@ export class RecentSearches {
       return `${((temp - 32) * 5/9).toFixed(2)} °C`;
     }
     return `${temp} °${displayUnit == 'metric' ? 'C' : 'F'}`;
-  }    
+  }
 }
