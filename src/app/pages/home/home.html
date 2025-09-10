@@ -7,13 +7,13 @@ Dear new hire, we're excited to have you on board. Please make sure to read the 
     own components for displaying weather data. -->    
 
 <div class="h-[100vh] flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-gray-300 to-blue-200">
-    <form class="flex flex-col gap-3 *:flex *:gap-5 *:items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="w-6/10 sm:w-75 flex flex-col gap-3 *:flex *:gap-5 *:items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div>
-            <input class="p-2 border-2 rounded-lg shadow-lg outline-none" type="text" formControlName="city" placeholder="Input City"/>
+            <input class="w-100 p-2 border-2 rounded-lg shadow-lg outline-none" type="text" formControlName="city" placeholder="Input City"/>
         </div>
         <div>
-            <label class="pl-1 w-1/4" for="country">Unit:</label>
-            <select class="w-3/4 p-2 border-2 rounded-lg shadow-lg outline-none" id="unit" formControlName="unit">
+            <label class="pl-1 w-1/5" for="country">Unit:</label>
+            <select class="w-4/5 p-2 border-2 rounded-lg shadow-lg outline-none" id="unit" formControlName="unit">
                 @for (u of units; track u) {
                     <option class="w-full" [value]="u">{{ u.charAt(0).toUpperCase()+ u.slice(1) }}</option>
                 }
@@ -34,6 +34,6 @@ Dear new hire, we're excited to have you on board. Please make sure to read the 
     }
     
     @if (recents()) {
-        <app-recent-searches [recentSearches]="recentSearches" [displayUnit]="inputUnit()"/>
+        <app-recent-searches class="w-6/10 sm:w-75" [recentSearches]="recentSearches" [displayUnit]="inputUnit()"/>
     }
 </div>
