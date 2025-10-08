@@ -160,7 +160,33 @@ After you're done, you can deploy your app for free these platform:
 3. Set build command (`npm run build`) and publish directory (`dist` for Angular)
 4. Deploy and share your link
 
-All deployed links will be compiled in a central list so you can view the work of your peers.
+### 🟣 [Central App Collection (GitHub Pages)](https://marhano.github.io/weather-app/)
+
+We maintain a central collection of all deployed Weather Apps at [https://marhano.github.io/weather-app/](https://marhano.github.io/weather-app/).
+
+**To add your app to this collection:**
+
+1. Make sure your app is deployed and accessible via a public URL (e.g., Netlify, Vercel, or GitHub Pages).
+2. Fork this repository (if you haven't already).
+3. Get the latest branches from the main repo.
+
+   ```bash
+   git remote add upstream https://github.com/marhano/weather-app.git
+   git fetch upstream
+   ```
+   
+4. Create a branch base on the `gh-pages` branch of the main repo:
+5. Open the `index.html` file in the root of the repo (on the `gh-pages` branch).
+6. Add your app to the list! You can freely design how your preview will look.
+
+   Place your entry below the last one in the list.
+
+7. Commit and push your changes:
+8. Open a Pull Request **to the `gh-pages` branch** of the main repository.
+
+Once merged, your app will appear in the central collection at [https://marhano.github.io/weather-app/](https://marhano.github.io/weather-app/) for everyone to see!
+
+---
 
 ### 🌟 Sample Deployed App
 
@@ -181,6 +207,7 @@ You can view a sample deployment of this project here: [Sample Weather App](http
 After you're done:
 
 - Submit your deployed URL to your onboarding reviewer
+- **Add your app to the [central collection](https://marhano.github.io/weather-app/) via a PR to the `gh-pages` branch (see above!)**
 - Review a peer’s project and leave feedback
 - Look forward to the next task 🎯
 
